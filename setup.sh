@@ -24,8 +24,8 @@ sudo apt-get -y install mysql-server
 # Configure Postgres
 sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/9.1/main/postgresql.conf
 echo "host    all             all             10.0.2.2/32               md5" | sudo tee -a /etc/postgresql/9.1/main/pg_hba.conf
-sudo -u postgres psql -c "CREATE ROLE taylor LOGIN UNENCRYPTED PASSWORD 'secret' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
-sudo -u postgres /usr/bin/createdb --echo --owner=taylor laravel
+sudo -u postgres psql -c "CREATE ROLE eric LOGIN UNENCRYPTED PASSWORD 'secret' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+sudo -u postgres /usr/bin/createdb --echo --owner=eric laravel
 sudo service postgresql restart
 
 # Configure MySQL
@@ -133,8 +133,8 @@ sudo a2enmod rewrite
 echo "127.0.0.1  info.app" | sudo tee -a /etc/hosts
 vhost="<VirtualHost *:80>
      ServerName info.app
-     DocumentRoot /home/taylor/Scripts/PhpInfo
-     <Directory \"/home/taylor/Scripts/PhpInfo\">
+     DocumentRoot /home/eric/Scripts/PhpInfo
+     <Directory \"/home/eric/Scripts/PhpInfo\">
           Order allow,deny
           Allow from all
           Require all granted
@@ -150,8 +150,8 @@ cd ~/Scripts
 git clone https://github.com/ptrofimov/beanstalk_console.git Beansole
 vhost="<VirtualHost *:80>
      ServerName beansole.app
-     DocumentRoot /home/taylor/Scripts/Beansole/public
-     <Directory \"/home/taylor/Scripts/Beansole/public\">
+     DocumentRoot /home/eric/Scripts/Beansole/public
+     <Directory \"/home/eric/Scripts/Beansole/public\">
           Order allow,deny
           Allow from all
           Require all granted
@@ -166,7 +166,7 @@ sudo /etc/init.d/apache2 restart
 sudo mount /dev/cdrom /media/cdrom
 sudo sh /media/cdrom/VBoxLinuxAdditions.run
 sudo usermod -aG vboxsf www-data
-sudo usermod -aG vboxsf taylor
+sudo usermod -aG vboxsf eric
 
 # Final Clean
 cd ~
